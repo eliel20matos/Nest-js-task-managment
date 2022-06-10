@@ -20,16 +20,10 @@ export class TasksController {
   //Dependence injection of taskService
   constructor(private tasksService: TasksService) {}
 
-  // @Get()
-  // getasks(@Query() filterDto: GetTasksFilterDto): Task[] {
-  //   // if we have any filters defined, call tasksService.getTasksWilFilters
-  //   //otherwise, just get all tasks
-  //   if (Object.keys(filterDto).length) {
-  //       return this.tasksService.getTasksWithFilters(filterDto);
-  //   } else {
-  //     return this.tasksService.getAllTaks();
-  //   }
-  // }
+  @Get()
+  getasks(@Query() filterDto: GetTasksFilterDto): Promise<Task[]> {
+    return this.tasksService.getTasks(filterDto)
+  }
 
   @Get('/:id')
   getTaskById(@Param('id') id: string): Promise<Task> {
