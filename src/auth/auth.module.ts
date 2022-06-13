@@ -5,6 +5,7 @@ import { UsersRepository } from './users.repository';
 import { TypeOrmExModule } from 'src/database/typeorm-ex.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { JwtEstrategy } from './jwt.strategy';
 
 @Module({
   imports: [
@@ -17,8 +18,8 @@ import { JwtModule } from '@nestjs/jwt';
     }),
     TypeOrmExModule.forCustomRepository([UsersRepository],)
   ],
-  providers: [AuthService],
+  providers: [AuthService, JwtEstrategy],
   controllers: [AuthController],
-  exports: [AuthService],
+  exports: [AuthService, JwtEstrategy, PassportModule],
 })
 export class AuthModule {}
